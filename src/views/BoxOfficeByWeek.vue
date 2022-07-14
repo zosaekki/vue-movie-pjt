@@ -1,11 +1,11 @@
 <template>
     <div>
-        <h1>BoxOfficeByDay</h1>
+        <h1>BoxOfficeByWeek</h1>
         <div>
             <input type="date" v-model="selectedDate">
             <button @click="search">검색</button>
+            <rank-table :list="list" />
         </div>
-        <RankTable :list="list" />
     </div>
 </template>
 
@@ -26,12 +26,11 @@ export default {
         search() {
             const targetDt = this.selectedDate.replaceAll('-', '');
             this.getData(targetDt);
-            console.log(targetDt);
         },
         async getData(targetDt) {
-            const data = await this.getBoxOfficeByDay(targetDt)
-            this.list = data.boxOfficeResult.dailyBoxOfficeList;
-            console.log(data);
+            const data = await this.getBoxOfficeByWeek(targetDt)
+            this.list = data.boxOfficeResult.weeklyBoxOfficeList;
+            // console.log(data);
         },
     },
     created() {
